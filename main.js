@@ -13,6 +13,12 @@ function createWindow () {
   win.loadFile('index.html')
 }
 
+// 将一个项目添加到最近文档
+app.addRecentDocument('/Users/USERNAME/Desktop/work.type')
+
+// 清除最近文档列表
+app.clearRecentDocuments()
+
 app.whenReady().then(() => {
   createWindow()
 
