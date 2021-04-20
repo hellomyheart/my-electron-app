@@ -13,6 +13,22 @@ function createWindow () {
   win.loadFile('index.html')
 }
 
+//开启win任务栏
+app.setUserTasks([
+  {
+    program: process.execPath,
+    arguments: '--new-window',
+    iconPath: process.execPath,
+    iconIndex: 0,
+    title: 'New Window',
+    description: 'Create a new window'
+  }
+])
+
+// 清除win任务栏
+//其实就是重新设置
+app.setUserTasks([])
+
 app.whenReady().then(() => {
   createWindow()
 
