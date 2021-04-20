@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, Menu } = require('electron')
 const path = require('path')
 
 function createWindow () {
@@ -15,6 +15,24 @@ function createWindow () {
 
 app.whenReady().then(() => {
   createWindow()
+
+
+  const dockMenu = Menu.buildFromTemplate([
+    {
+      label: 'New Window',
+      click () { console.log('New Window') }
+    }, {
+      label: 'New Window with Settings',
+      submenu: [
+        { label: 'Basic' },
+        { label: 'Pro' }
+      ]
+    },
+    { label: 'New Command...' }
+  ])
+
+
+  app.dock.setMenu(dockMenu)
 
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
