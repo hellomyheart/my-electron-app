@@ -24,6 +24,9 @@ function createWindow() {
   // 清除缩略图
   win.setThumbarButtons([])
 
+  //任务栏图标叠加
+  win.setOverlayIcon('test2.png', 'Description for overlay')
+
 }
 
 
