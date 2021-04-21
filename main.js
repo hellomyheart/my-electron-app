@@ -1,5 +1,18 @@
-const { app, BrowserWindow } = require('electron')
+const { Menu, MenuItem,app, BrowserWindow } = require('electron')
 const path = require('path')
+
+
+const menu = new Menu()
+menu.append(new MenuItem({
+  label: 'Electron',
+  submenu: [{
+    role: 'help',
+    accelerator: process.platform === 'darwin' ? 'Alt+Cmd+I' : 'Alt+Shift+I',
+    click: () => { console.log('Electron rocks!') }
+  }]
+}))
+
+Menu.setApplicationMenu(menu)
 
 function createWindow () {
   const win = new BrowserWindow({
