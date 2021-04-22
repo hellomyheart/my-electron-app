@@ -1,6 +1,7 @@
-const alertOnlineStatus = () => { window.alert(navigator.onLine ? 'online' : 'offline') }
+const { ipcRenderer } = require('electron')
+const updateOnlineStatus = () => { ipcRenderer.send('online-status-changed', navigator.onLine ? 'online' : 'offline') }
 
-window.addEventListener('online', alertOnlineStatus)
-window.addEventListener('offline', alertOnlineStatus)
+window.addEventListener('online', updateOnlineStatus)
+window.addEventListener('offline', updateOnlineStatus)
 
-alertOnlineStatus()
+updateOnlineStatus()

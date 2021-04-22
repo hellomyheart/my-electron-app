@@ -1,12 +1,15 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow,ipcMain } = require('electron')
 const path = require('path')
 
 let onlineStatusWindow
 
-
 app.whenReady().then(() => {
-  onlineStatusWindow = new BrowserWindow({ width: 0, height: 0, show: false })
+  onlineStatusWindow = new BrowserWindow({ width: 0, height: 0, show: false, webPreferences: { nodeIntegration: true } })
   onlineStatusWindow.loadURL(`file://${__dirname}/index.html`)
+})
+
+ipcMain.on('online-status-changed', (event, status) => {
+  console.log(status)
 })
 
 app.on('window-all-closed', () => {
