@@ -1,5 +1,11 @@
 const { app, BrowserWindow } = require('electron')
 const path = require('path')
+const fs = require('fs')
+
+app.disableHardwareAcceleration()
+
+let win
+
 
 function createWindow () {
   const win = new BrowserWindow({
@@ -14,13 +20,13 @@ function createWindow () {
 }
 
 app.whenReady().then(() => {
-  createWindow()
+  win = new BrowserWindow({ webPreferences: { offscreen: true } })
 
-  app.on('activate', () => {
-    if (BrowserWindow.getAllWindows().length === 0) {
-      createWindow()
-    }
+  win.loadURL('https://github.com')
+  win.webContents.on('paint', (event, dirty, image) => {
+    fs.writeFileSync('ex.png', image.toPNG())
   })
+  win.webContents.setFrameRate(60)
 })
 
 app.on('window-all-closed', () => {
